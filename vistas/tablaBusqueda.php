@@ -27,7 +27,7 @@ include("../sec/BBDD.php");
 
         for($i = 0;$i < $res->num_rows; $i++){
             $vec = $res->fetch_assoc();
-            if($vec['id'] != 0 || $vec["id"] != $_SESSION["id"]){
+            //if($vec['id'] != 0 || $vec["id"] != $_SESSION["id"]){
                 $recibe = $vec["id"];
                 
                 $folt = $db->prepare("SELECT * from bloqueos where (id_solicitante = ? and id_bloqueado = ?) or (id_solicitante = ? and id_bloqueado = ?)");
@@ -142,7 +142,7 @@ include("../sec/BBDD.php");
     </tr>
 <?php 
         } // Fin if bloqueos
-    } // Fin if validación usuario
+    //} // Fin if validación usuario
 } // Fin For
 ?>
 </table>

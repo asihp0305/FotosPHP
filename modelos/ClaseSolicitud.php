@@ -79,6 +79,52 @@ class Solicitud{
         $filt->bind_param('ii', $idBloquear, $idSolicitante);
         $filt->execute();
     }
+
+    public function EliminarAmigo($idElim) {
+        include('../sec/BBDD.php');
+        $idSesion = $_SESSION['id'];
+        $filt = $db->prepare('SELECT amigos from usuarios where id = ?');
+        $filt->bind_param('i', $idSesion);
+        $filt->execute();
+        $res = $filt->get_result();
+        $vec = $res->fetch_assoc();
+
+        $strAmigos = $vec["amigos"];
+
+        $amigos = explode('#',$strAmigos);
+
+        $nuevoArray = array_diff($amigos, array($idElim));
+
+        $strNuevo = implode('#', $nuevoArray);
+
+        $filt = $db->prepare("UPDATE usuarios set amigos = ? where id = ?");
+        $filt->bind_param('si', $strNuevo, $idSesion);
+        $filt->execute();
+
+        //ahora eliminamos el amigo de la otra cuenta
+
+        $filt = $db->prepare('SELECT amigos from usuarios where id = ?');
+        $filt->bind_param('i', $idElim);
+        $filt->execute();
+        $res = $filt->get_result();
+        $vec = $res->fetch_assoc();
+
+        $strAmigos = $vec["amigos"];
+
+        $amigos = explode('#',$strAmigos);
+
+        $nuevoArray = array_diff($amigos, array($idSesion));
+
+        $strNuevo = implode('#', $nuevoArray);        
+        
+        if (strlen($strNuevo) == 0){
+            $strNuevo = ' ';
+        }
+
+        $filt = $db->prepare("UPDATE usuarios set amigos = ? where id = ?");
+        $filt->bind_param('si', $strNuevo, $idElim);
+        $filt->execute();
+    }
 }
 
 

@@ -30,8 +30,10 @@ if(!isset($_SESSION["Level"])){
                 $Amigos = $res->fetch_assoc();
                 $stringAmigos = $Amigos['amigos'];
                 $vecAmigos = explode('#',$stringAmigos);
-                
+                //limpiamos el array para que cuando esta vacio no meta ningun 0
+                $vecAmigos = array_diff(array_filter($vecAmigos),array('0'));
                 foreach($vecAmigos as $amigo){
+                    
                     $felt = $db->prepare('SELECT * from usuarios where id = ?');
                     $felt->bind_param('i', $amigo);
                     $felt->execute();
@@ -57,4 +59,24 @@ if(!isset($_SESSION["Level"])){
         <?php }}?>
     </table>
 </body>
+
+<script>
+    $(".btnElim").click(function(){
+        let idElim = $(this).attr("laid");
+
+        $.ajax({
+            type: "post",
+            url: 'controladores/controladorSolicitudes.php',
+            data:{
+                opt: 5,
+                idElim: idElim
+            },
+
+            success:function(data){
+                location.reload();
+            }
+        });
+    })
+</script>
+
 </html>

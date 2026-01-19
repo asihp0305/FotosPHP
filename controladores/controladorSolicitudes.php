@@ -33,6 +33,11 @@ switch($opt){
         $sol->Bloquear($idBloqueada);
         break;
 
+    case 5:
+        $idElimAmigo = filter_input(INPUT_POST,"idElim",FILTER_SANITIZE_NUMBER_INT);
+        $sol->EliminarAmigo($idElimAmigo);
+        break;
+
     default:
         break;
 
