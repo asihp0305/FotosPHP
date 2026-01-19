@@ -80,11 +80,19 @@ include("../sec/BBDD.php");
             $stringAmigos = $amigos['amigos'];
             $vecAmigos = explode('#',$stringAmigos);
 
-            if(in_array($recibe, $vecAmigos)){
+            /* if(in_array($recibe, $vecAmigos)){
                  $tipo = "amigos";   
-            }
+            } */
+
+            $recibe = $vec["id"];
+
+           for($i=0;$i < count($vecAmigos);$i++){
+                if($vecAmigos[$i] == $recibe){
+                    $tipo = "amigos";
+                }
+           }
         }
-        if($tipo = "nada"){
+        if($tipo == "nada"){
             $flit = $db->prepare("SELECT * from solicitudes where id_sol = ? and id_rec = ?");
             $flit->bind_param("ii",$envia,$recibe);
             $flit->execute();
