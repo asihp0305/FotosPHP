@@ -57,10 +57,4 @@ if(!isset($_SESSION["Level"])){
         <?php }}?>
     </table>
 </body>
-
-<script>
-    // Hacer que se recargue la pagina para actualizar en tiempo real lo del Conectado
-    
-
-</script>
 </html>

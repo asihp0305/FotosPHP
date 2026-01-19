@@ -33,6 +33,40 @@
     <div id="Galeria"></div>
 </body>
   <script>
+
+        let ListaMostrada = false;
+        let SolicitudesMostradas = false;
+        let buscarMostrado = false;
+
+
+        $.ajax({
+            type: "POST",
+            url: "vistas/buscarAmigos.php",
+            success: function(data){
+                $("#buscar").html(data);
+            }
+        })
+
+        $.ajax({
+            type: "POST",
+            url: "vistas/soliRecibidas.php",
+            success: function(data){
+                $("#Solicitudes").html(data);
+            }
+        })
+
+        $.ajax({
+            type:'POST',
+            url:"vistas/listaAmigos.php",
+            success:function(data){
+                $('#ListaAmigos').html(data);
+            }
+        })  
+        
+        $("#buscar").hide();
+        $("#Solicitudes").hide();
+        $("#ListaAmigos").hide(); 
+
         $.ajax({
             type:"post",
             url:"vistas/tablaAdmin.php",
@@ -40,8 +74,7 @@
             $("#TablaAdmin").html(data);
         }
         });
-    </script>
-    <script>
+
         $.ajax({
             type:"post",
             url:"vistas/galeria.php",
@@ -49,9 +82,7 @@
             $("#Galeria").html(data);
         }
         });
-    </script>
-
-    <script>
+    
         $("#cambioIdioma").change(function(){
             let newIdioma = $(this).val();
             
@@ -66,61 +97,59 @@
                 }
             })
         });
-    </script>
-    <script>
+    
         $("#btnBusc").click(function(){
-            if ($.trim($("#buscar").html()) !== "") {
-                $("#buscar").html(''); 
-            } else {
-                $('#Solicitudes').html('');
-                $('#ListaAmigos').html('');
-
-                $.ajax({
-                    type: "POST",
-                    url: "vistas/buscarAmigos.php",
-                    success: function(data){
-                        $("#buscar").html(data);
-                    }
-                })
+          if(buscarMostrado == true){
+            $('#buscar').hide();
+            buscarMostrado = false;
+          }else{
+                $('#Solicitudes').hide();
+                $('#ListaAmigos').hide();
+                $("#buscar").toggle();
+                buscarMostrado = true;
             }
+               
+            
         });
-    </script>
-    <script>
+    
         $("#btnSolicitud").click(function(){
-            if ($.trim($("#Solicitudes").html()) !== "") {
-                $("#Solicitudes").html(''); 
-            } else {
-                $('#buscar').html('');
-                $('#ListaAmigos').html('');
-
-                $.ajax({
-                    type: "POST",
-                    url: "vistas/soliRecibidas.php",
-                    success: function(data){
-                        $("#Solicitudes").html(data);
-                    }
-                })
-            }
+            if(SolicitudesMostradas == true){
+                $('#Solicitudes').hide();
+                SolicitudesMostradas=false;
+            }else{
+                $('#buscar').hide();
+                $('#ListaAmigos').hide();
+                $("#Solicitudes").toggle();
+                SolicitudesMostradas = true;
+            }   
         });
-    </script>
-
-    <script>
+    
         $('#btnListaAmigos').click(function(){
-            if ($.trim($("#ListaAmigos").html()) !== "") {
-                $("#ListaAmigos").html(''); 
-            } else {
-                $('#buscar').html('');
-                $('#Solicitudes').html('');
-                
+            if(ListaMostrada == true){
+                $("ListaAmigos").hide();
+                ListaMostrada = false;
+            }else{
+                $('#buscar').hide();
+                $('#Solicitudes').hide();
+                $("#ListaAmigos").toggle();
+                ListaMostrada = true;
+            }            
+        })
+
+         function ListaAmigosAJAX(){
                 $.ajax({
                     type:'POST',
                     url:"vistas/listaAmigos.php",
                     success:function(data){
-                        console.log('algo hace')
                         $('#ListaAmigos').html(data);
                     }
                 })
             }
-        })
+        $(document).ready(function(){       
+            setInterval(ListaAmigosAJAX,5000);
+        }); 
+
     </script>
+
+   
 </html>
