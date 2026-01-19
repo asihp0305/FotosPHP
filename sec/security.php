@@ -26,8 +26,8 @@ $user = filter_input(INPUT_POST, 'user', FILTER_SANITIZE_SPECIAL_CHARS);
 $pass = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_SPECIAL_CHARS);
 
     
-$filt = $db->prepare("SELECT * FROM usuarios where user = ?");
-$filt->bind_param('s',$user);
+$filt = $db->prepare("SELECT * FROM usuarios where user = ? or email = ?");
+$filt->bind_param('ss',$user, $user);
 
 $filt->execute();
 $res = $filt->get_result();

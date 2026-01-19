@@ -55,7 +55,7 @@ switch ($option) {
         break;
     
     case 3:
-    if((isset($_POST["usr"]))&&(isset($_POST["pass"]))&&(isset($_POST["name"]))){
+    if((isset($_POST["usr"]))&&(isset($_POST["pass"]))&&(isset($_POST["name"]))&&(isset($_POST["email"]))){
 
         //$usuario = $_POST["usr"];
         $usuario = filter_input(INPUT_POST, 'usr', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -64,9 +64,11 @@ switch ($option) {
         //$name = $_POST["name"];
         $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_SPECIAL_CHARS);
 
+        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_SPECIAL_CHARS);
+
         if((!empty($usuario))&&(!empty($Pass))&&(!empty($name))){
 
-            $user->AddUsuarioLogin($usuario,$Pass,$name);
+            $user->AddUsuarioLogin($usuario,$Pass,$name,$email);
             
             $filt = $db->prepare("SELECT * from usuarios where user = ?");
             $filt->bind_param("s",$usuario);
@@ -87,7 +89,7 @@ switch ($option) {
 
 
     case 4:
-    if((isset($_POST["usr"]))&&(isset($_POST["pass"]))&&(isset($_POST["name"]))){
+    if((isset($_POST["usr"]))&&(isset($_POST["pass"]))&&(isset($_POST["name"]))&&(isset($_POST["email"]))){
 
         //$usuario = $_POST["usr"];
         $usuario = filter_input(INPUT_POST, 'usr', FILTER_SANITIZE_SPECIAL_CHARS);
@@ -95,12 +97,14 @@ switch ($option) {
         $Pass = filter_input(INPUT_POST, 'pass', FILTER_SANITIZE_SPECIAL_CHARS);
         //$name = $_POST["name"];
         $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_SPECIAL_CHARS);
+
+        $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_SPECIAL_CHARS);
         if(isset($_POST["level"])){
             $level = $_POST["level"];
 
-            if((!empty($usuario))&&(!empty($Pass))&&(!empty($name))&&(($level==0)||($level==1))){
+            if((!empty($usuario))&&(!empty($Pass))&&(!empty($name))&&(!empty($email))&&(($level==0)||($level==1))){
 
-                $user->AddUsuario($usuario,$Pass,$name,$level);
+                $user->AddUsuarioAdmin($usuario,$Pass,$name,$level,$email);
             }
         }
     

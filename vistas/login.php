@@ -25,7 +25,7 @@ if(isset($_COOKIE["cookieUser"])){
         <form method="post" action="../index.php"><!--Con el get se ve lo enviado en la url, con el post habria q verlo en network-->
             <h2>Introduce tus credenciales</h2>
 
-            <label for="user">Usuario:</label>
+            <label for="user">Usuario o email:</label>
             <input type="text" id="user" name="user"><br>
             
             <label for="password">Contraseña:</label>
@@ -54,7 +54,10 @@ if(isset($_COOKIE["cookieUser"])){
             <input type="text" id="name" name="name">
             
             <label for="newUser">Introduce el nombre que deseas:</label>
-            <input type="text" id="usr" name="usr"><br>
+            <input type="text" id="usr" name="usr"><br> 
+            
+            <label for="newUser">Introduce tu correo electronico:</label>
+            <input type="text" id="email" name="email"><br>
             
             <label for="password">Introduce una contraseña que recuerdes:</label>
             <input type="password" id="pass" name="pass"><br>

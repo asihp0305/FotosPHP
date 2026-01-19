@@ -27,6 +27,7 @@ if(!isset($_SESSION["Level"])){
         <th><?php echo $idioma->palabras->usuario ?></th>
         <th><?php echo $idioma->palabras->contrasena ?></th>
         <th><?php echo $idioma->palabras->nombre ?></th>
+        <th>EMAIL</th>
         <th><?php echo $idioma->palabras->nivel ?></th>
      </tr>
      <?php 
@@ -43,6 +44,7 @@ if(!isset($_SESSION["Level"])){
         <td><?php echo $vec["user"] ?></td>
         <td><input type="text" value= "<?php echo $vec["pass"] ?>" id="pass_<?php echo $vec["id"]?>" > </td>
         <td><input type="text" value= "<?php echo $vec["nombre"] ?>" id="nombre_<?php echo $vec["id"]?>" > </td>
+        <td><input type="text" value= "<?php echo $vec["email"] ?>" id="email_<?php echo $vec["id"]?>" > </td>
         <td><input type="text" value= "<?php echo $vec["nivel"] ?>" id="level_<?php echo $vec["id"]?>"> </td>
         <td><button type="button" class="BotUP" idup="<?php echo $vec["id"] ?>"> <?php echo $idioma->botones->act ?> </button></td>
      </tr>
@@ -53,6 +55,7 @@ if(!isset($_SESSION["Level"])){
         <td><input type="text" id="usr_nuevo"></td>
         <td><input type="text" id="pass_nuevo"></td>
         <td><input type="text" id="nombre_nuevo"></td>
+        <td><input type="text" id="email_nuevo"></td>
         <td><input type="text" id="nivel_nuevo"></td>
         <td><button type="button" id="BotAnadir"> <?php echo $idioma->botones->anadir ?> </button></td>
     </tr>
@@ -90,6 +93,7 @@ if(!isset($_SESSION["Level"])){
     $(".BotUP").click(function(){
         let laid = $(this).attr("idup");
         let nombre = $("#nombre_"+laid).val() ;
+        let email = $("#email_"+laid).val() ;
         let pass= $("#pass_"+laid).val() ;
         let level=$("#level_"+laid).val();
 
@@ -104,6 +108,7 @@ if(!isset($_SESSION["Level"])){
                 data: { id: laid , 
                         pass: pass ,
                         name: nombre ,
+                        email: email ,
                         level: level,
                         option: 2}
             })

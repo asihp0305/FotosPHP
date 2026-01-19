@@ -56,11 +56,11 @@ class usuario{
         
     }
 
-    public function AddUsuarioLogin($nombreUsr,$Pass,$Name){
+    public function AddUsuarioLogin($nombreUsr,$Pass,$Name,$email){
         include("../sec/BBDD.php");
             $has = password_hash($Pass, PASSWORD_DEFAULT);
-            $filt = $db->prepare("INSERT INTO usuarios(user,pass,nombre,nivel,Conectado) values(?,?,?,1,1)");
-            $filt->bind_param("sss",$nombreUsr,$has,$Name);
+            $filt = $db->prepare("INSERT INTO usuarios(user,pass,nombre,nivel,Conectado,email) values(?,?,?,1,1,?)");
+            $filt->bind_param("ssss",$nombreUsr,$has,$Name,$email);
             $filt->execute();
 
             $flit = $db->prepare("CREATE TABLE IF NOT EXISTS fotos_" . $nombreUsr . " (
@@ -77,11 +77,11 @@ class usuario{
             $flit->execute();
     }
 
-    public function AddUsuarioAdmin($nombreUsr,$Pass,$Name,$Level){
+    public function AddUsuarioAdmin($nombreUsr,$Pass,$Name,$Level,$email){
         include("../sec/BBDD.php");
             $has = password_hash($Pass, PASSWORD_DEFAULT);
-            $filt = $db->prepare("INSERT INTO usuarios(user,pass,nombre,nivel) values(?,?,?,?)");
-            $filt->bind_param("sssi",$nombreUsr,$has,$Name,$Level);
+            $filt = $db->prepare("INSERT INTO usuarios(user,pass,nombre,nivel,Conectado,email) values(?,?,?,?,0,?)");
+            $filt->bind_param("sssis",$nombreUsr,$has,$Name,$Level,$email);
             $filt->execute();
 
             $flit = $db->prepare("CREATE TABLE IF NOT EXISTS fotos_" . $nombreUsr . " (
