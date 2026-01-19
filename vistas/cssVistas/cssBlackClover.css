@@ -1,0 +1,338 @@
+/* =========================================
+   BLACK CLOVER THEME - GLOBAL STYLES
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@400;700&display=swap');
+
+:root {
+    --bc-black: #050505;        /* Fondo principal */
+    --bc-dark-gray: #1a1a1a;    /* Fondo de contenedores */
+    --bc-gold: #c5a059;         /* Acento principal (Toros Negros) */
+    --bc-gold-hover: #eec168;   /* Brillo dorado */
+    --bc-red: #8a0e0e;          /* Anti-magia / Borrar */
+    --bc-red-glow: #ff0000;     /* Brillo rojo */
+    --bc-text: #e0e0e0;         /* Texto principal */
+    --bc-magic-blue: #48c6ef;   /* Mana básico / Inputs */
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bc-black);
+    color: var(--bc-text);
+    font-family: 'Lato', sans-serif; /* Texto legible */
+    background-image: radial-gradient(circle at 50% 50%, #111 0%, #000 100%);
+    min-height: 100vh;
+}
+
+h1, h2, h3, th {
+    font-family: 'Cinzel', serif; /* Fuente estilo fantasía/medieval */
+    color: var(--bc-gold);
+    text-shadow: 0 0 5px rgba(197, 160, 89, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 1rem;
+}
+
+/* =========================================
+   BOTONES (Grimoire Spells)
+   ========================================= */
+button, input[type="submit"] {
+    background-color: #000;
+    border: 2px solid var(--bc-gold);
+    color: var(--bc-gold);
+    padding: 10px 20px;
+    font-family: 'Cinzel', serif;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: var(--bc-gold);
+    color: #000;
+    box-shadow: 0 0 15px var(--bc-gold);
+}
+
+/* Botones de acción destructiva (Borrar / Anti-magia) */
+button.botBorrar, button.Destruir, #BotBorrar {
+    border-color: var(--bc-red);
+    color: var(--bc-red);
+}
+
+button.botBorrar:hover, button.Destruir:hover, #BotBorrar:hover {
+    background-color: var(--bc-red);
+    color: #fff;
+    box-shadow: 0 0 15px var(--bc-red-glow);
+}
+
+/* Botones de navegación y secundarios */
+button#Borradas, button#Normales, .botRecuperar {
+    margin: 10px;
+    border-style: double;
+}
+
+/* Enlace Log Out estilo botón */
+button.logOut {
+    border-color: #fff;
+    color: #fff;
+    float: right;
+    margin: 10px;
+}
+button.logOut a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* =========================================
+   INPUTS Y FORMULARIOS
+   ========================================= */
+input[type="text"], 
+input[type="password"], 
+input[type="file"],
+select {
+    background-color: var(--bc-dark-gray);
+    border: 1px solid #444;
+    color: #fff;
+    padding: 10px;
+    border-radius: 2px;
+    width: 100%; /* Ajustable según contenedor */
+    margin-bottom: 10px;
+    font-family: 'Lato', sans-serif;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--bc-gold);
+    box-shadow: 0 0 8px rgba(197, 160, 89, 0.4);
+}
+
+/* =========================================
+   LOGIN Y REGISTRO (.LogIn, .Registro)
+   ========================================= */
+.LogIn, .Registro {
+    width: 350px;
+    margin: 80px auto;
+    padding: 40px;
+    background: linear-gradient(145deg, #151515, #0a0a0a);
+    border: 1px solid var(--bc-gold);
+    border-radius: 5px; /* Bordes ligeramente redondeados */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8), inset 0 0 10px rgba(197, 160, 89, 0.1);
+    position: relative;
+}
+
+/* Decoración estilo trébol/grimorio en esquinas (opcional con pseudo-elementos) */
+.LogIn::before, .Registro::before {
+    content: "♣";
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 2rem;
+    color: rgba(30, 30, 30, 0.8);
+    pointer-events: none;
+}
+
+.LogIn label, .Registro label {
+    color: var(--bc-gold);
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    display: block;
+}
+
+#botReg, #botLog {
+    background: transparent;
+    border: none;
+    border-top: 1px solid #333;
+    color: #888;
+    width: 100%;
+    margin-top: 20px;
+    font-size: 0.8rem;
+}
+#botReg:hover, #botLog:hover {
+    color: var(--bc-text);
+    background: transparent;
+    box-shadow: none;
+}
+
+/* =========================================
+   GALERÍA (.galeria, .contenido)
+   ========================================= */
+.galeria, .Recuperar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.contenido {
+    background-color: var(--bc-dark-gray);
+    border: 1px solid #333;
+    padding: 15px;
+    width: 240px;
+    text-align: center;
+    transition: transform 0.3s, border-color 0.3s;
+    position: relative;
+}
+
+.contenido:hover {
+    transform: translateY(-5px);
+    border-color: var(--bc-gold);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+.imagen img {
+    width: 200px;
+    height: 200px;
+    border: 2px solid #000;
+    margin-bottom: 10px;
+    filter: sepia(20%) contrast(1.1); /* Toque antiguo */
+}
+
+.nombrefoto {
+    font-weight: bold;
+    color: var(--bc-gold);
+    margin: 5px 0;
+}
+
+.descripcionfoto {
+    font-size: 0.85rem;
+    color: #aaa;
+    margin-bottom: 10px;
+    font-style: italic;
+}
+
+/* Botones pequeños dentro de las cartas */
+.contenido button {
+    font-size: 0.7rem;
+    padding: 5px 10px;
+    margin: 2px;
+    width: auto;
+}
+
+/* Favoritos - Destacar cartas */
+.QuitFav {
+    border-color: #ffd700; /* Oro puro */
+}
+
+/* =========================================
+   TABLAS (Admin y Búsqueda)
+   ========================================= */
+table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: var(--bc-dark-gray);
+    border: 1px solid var(--bc-gold);
+}
+
+th {
+    background-color: #000;
+    color: var(--bc-gold);
+    padding: 15px;
+    border-bottom: 2px solid var(--bc-gold);
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid #333;
+    text-align: center;
+    color: var(--bc-text);
+}
+
+tr:hover td {
+    background-color: #222;
+}
+
+/* Inputs dentro de tablas */
+table input[type="text"] {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #555;
+    text-align: center;
+    color: #fff;
+}
+table input[type="text"]:focus {
+    border-bottom-color: var(--bc-gold);
+    box-shadow: none;
+}
+
+/* =========================================
+   BARRA DE NAVEGACIÓN / HEADER
+   ========================================= */
+/* Si tienes un header o div superior */
+body > h1 {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 2.5rem;
+    border-bottom: 1px solid #333;
+    padding-bottom: 20px;
+}
+
+#cambioIdioma {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: auto;
+    background: #000;
+    border-color: var(--bc-gold);
+}
+
+/* =========================================
+   BÚSQUEDA (#buscador)
+   ========================================= */
+#buscar {
+    text-align: center;
+    margin: 20px 0;
+}
+
+#buscador {
+    display: inline-block;
+    border: 1px solid var(--bc-gold);
+    padding: 10px;
+    background: #000;
+}
+
+#buscador input {
+    margin: 0;
+    border: none;
+    border-bottom: 1px solid #555;
+}
+
+#btnBuscar {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    box-shadow: none;
+}
+
+#btnBuscar:hover {
+    transform: scale(1.2);
+    color: var(--bc-gold);
+    background: none;
+    box-shadow: none;
+}
+
+/* =========================================
+   SCROLLBAR (Para navegadores Webkit)
+   ========================================= */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #000;
+}
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border: 1px solid var(--bc-gold);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--bc-gold);
+}

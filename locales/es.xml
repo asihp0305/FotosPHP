@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+    <textos>
+        <palabras>
+            <bienve>Bienvenido</bienve>
+            <seleccion>Selecciona</seleccion>
+            <usuario>Usuario</usuario>
+            <contrasena>Contraseña</contrasena>
+            <nombre>Nombre</nombre>
+            <nivel>Nivel</nivel>
+        </palabras>
+
+        <botones>
+            <borrar>BORRAR</borrar>
+            <act>ACTUALIZAR</act>
+            <anadir>AÑADIR</anadir>
+            <logOut>Cerrar Sesión</logOut>
+            <send>Enviar</send>
+        </botones>
+
+    </textos>
