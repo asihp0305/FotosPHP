@@ -45,9 +45,9 @@ if(!isset($_SESSION["Level"])){
             <?php 
                 if($vec["Conectado"] == 1){
             ?>
-            <td>En linea</td>
+            <td>🟢</td>
             <?php }else{?>
-            <td>Desconectado</td>
+            <td>🔴</td>
             <?php }?>
             <td><?php echo $vec['user'] ?></td>
             <td> <?php echo $vec['nombre'] ?> </td>
