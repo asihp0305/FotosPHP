@@ -27,7 +27,7 @@ class Fotos{
             $userShare = "";
             $disc_name = "USR_" . $_SESSION["user"] . "_for_" . "idFoto"  . "." . $extension;
                
-            $filt = $db->prepare("INSERT INTO FOTOS_" . $_SESSION["user"] . " (NOMBRE_FOTO, DESCRIPCION, NOMBRE_DISCO, Estado, Comparticion, UsuarioOriginal, UsuarioCompartidos) VALUES (?, '', ?, 0, 0, 0, ?)");
+            $filt = $db->prepare("INSERT INTO FOTOS_" . $_SESSION["user"] . " (NOMBRE_FOTO, DESCRIPCION, NOMBRE_DISCO, Estado, Comparticion, UsuarioOriginal, UsuarioCompartidos) VALUES (?, 'Sin descripcion', ?, 0, 0, 0, ?)");
             $filt->bind_param("sss", $fileName, $disc_name, $userShare);
             $filt->execute();
          
