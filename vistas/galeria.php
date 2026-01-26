@@ -24,7 +24,9 @@
         <input type="submit" id="uploadFile">
         <input name="opt" type="hidden" value="0">
     </form>
- <button id="Borradas">Recuperar</button> <button id="Normales">Volver</button>
+    <button id="btnCompartir">Compartir</button>
+    <button id="Borradas">Recuperar</button> <button id="Normales">Volver</button>
+    <div id="AmigosCompartir"></div>
     <div class="galeria" >
          <?php 
          //las q estan en favoritos
@@ -37,13 +39,16 @@
             $vec = $res->fetch_assoc();
         ?>
         <div class="contenido">
+            <input type="checkbox" nombreFoto="<?php echo $vec["id"]?>" class="compartir">
             <div class="imagen">
-                <img  src="../fotos/fotos_<?php echo $_SESSION["user"]."/".$vec["NOMBRE_DISCO"] ?>" alt="Foto de ejemplo">
+                <img  src="fotos/fotos_<?php echo $_SESSION["user"]."/".$vec["NOMBRE_DISCO"] ?>" alt="Foto de ejemplo">
             </div>
             <button class="botEdit" ide="<?php echo $vec["id"]?>">Editar</button>
             <div class="nombrefoto" value = "<?php echo $vec["NOMBRE_FOTO"]?>"><?php echo $vec["NOMBRE_FOTO"]?></div>
             <div class="descripcionfoto" value = "<?php echo $vec["DESCRIPCION"]?>">Descripción de la foto:<?php echo $vec["DESCRIPCION"]?></div>
             <button class="botBorrar" laid="<?php echo $vec["id"]?>">Borrar</button> <button class="QuitFav" LAID="<?php echo $vec["id"]?>">Quitar Favoritos</button>
+           
+
         </div>
         <?php }?>
         
@@ -59,7 +64,8 @@
         ?>
         <div class="contenido">
             <div class="imagen">
-                <img width="200px" src="../fotos/fotos_<?php echo $_SESSION["user"]."/".$vec["NOMBRE_DISCO"] ?>" alt="Foto de ejemplo">
+                <input type="checkbox" nombreFoto="<?php echo $vec["id"]?>" class="compartir" >
+                <img width="200px" src="fotos/fotos_<?php echo $_SESSION["user"]."/".$vec["NOMBRE_DISCO"] ?>" alt="Foto de ejemplo">
             </div>
             <button class="botEdit" ide="<?php echo $vec["id"]?>">Editar</button>
             <div class="nombrefoto" value = "<?php echo $vec["NOMBRE_FOTO"]?>"><?php echo $vec["NOMBRE_FOTO"]?></div>
@@ -81,7 +87,7 @@
 
         <div class="contenido">
             <div class="imagen">
-                <img width="200px" src="../fotos/fotos_<?php echo $_SESSION["user"]."/".$vec["NOMBRE_DISCO"] ?>" alt="Foto de ejemplo">
+                <img width="200px" src="fotos/fotos_<?php echo $_SESSION["user"]."/".$vec["NOMBRE_DISCO"] ?>" alt="Foto de ejemplo">
             </div>
             <div class="nombrefoto" value = "<?php echo $vec["NOMBRE_FOTO"]?>"><?php echo $vec["NOMBRE_FOTO"]?></div>
             <div class="descripcionfoto" value = "<?php echo $vec["DESCRIPCION"]?>">Descripción de la foto:<?php echo $vec["DESCRIPCION"]?></div>
@@ -110,10 +116,10 @@
             }
         });
     });
-</script>
 
 
- <script>
+
+ 
     $(".botBorrar").click(function() {
         let idFoto = $(this).attr("laid");
 
@@ -129,9 +135,9 @@
             }
         });
     });
- </script>
+ 
 
- <script>
+ 
     $(".botEdit").click(function(){
         let idFoto = $(this).attr("ide");
         let elegir = parseFloat(prompt("Que deseas editar el nombre de la imagen(1), la descripción(2) o ambas(3)"));
@@ -199,9 +205,9 @@
                 break;
         }
     });
- </script>
+ 
 
- <script>
+ 
     $(".QuitFav").click(function(){
         let LAid = $(this).attr("LAID");
         $.ajax({
@@ -216,9 +222,9 @@
             }
         })
     });
- </script>
 
- <script>
+
+ 
     $(".AddFav").click(function(){
         let LAid = $(this).attr("LAIDadd");
         $.ajax({
@@ -233,9 +239,9 @@
             }
         })
     });
- </script>
+ 
 
- <script>
+ 
     $("#Normales").hide();
     $(".Recuperar").hide();
     $("#Borradas").click(function(){
@@ -251,9 +257,9 @@
         $("#Borradas").show();
         $(".galeria").show();
     });
- </script>
 
- <script>
+
+ 
     $(".botRecuperar").click(function(){
         let IDE = $(this).attr("laid");
         $.ajax({
@@ -268,10 +274,8 @@
             }
         })
     });
- </script>
+ 
 
-
- <script>
     $(".Destruir").click(function(){
         let IDD = $(this).attr("LAIDdes");
         $.ajax({
@@ -286,5 +290,31 @@
             }
         })
     });
+
+    $(document).on("click","#btnCompartir",function(){
+        let FotosCompartir = [];
+        $(".compartir").each(function(){
+            if($(this).is(":checked")){
+                FotosCompartir.push($(this).attr("nombreFoto"));
+            }
+        });
+
+        if(FotosCompartir.length > 0){
+            $.ajax({
+                type:"post",
+                url:"vistas/compartir.php",
+                data:{
+                    fotosEnviadas: FotosCompartir
+                },
+                success:function(data){
+                    console.log("funca")
+                    $("#AmigosCompartir").html(data);
+                }
+            })
+        }else{
+            alert("Selecciona alguna foto por favor")
+        }
+    })
+
  </script>
 </html>

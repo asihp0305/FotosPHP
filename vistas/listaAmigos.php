@@ -51,7 +51,7 @@ if(!isset($_SESSION["Level"])){
             <?php }?>
             <td><?php echo $vec['user'] ?></td>
             <td> <?php echo $vec['nombre'] ?> </td>
-            <td> <button class="btnMensaje" laid="<?php echo $vec['id']?>">Enviar mensaje</button> <button class="btnCompartir" laid="<?php echo $vec['id']?>">Compartir</button> <button class="btnElim" laid="<?php echo $vec['id']?>"> Eliminar Amigo</button> </td>
+            <td> <button class="btnMensaje" laid="<?php echo $vec['id']?>">Enviar mensaje</button> <button class="btnElim" laid="<?php echo $vec['id']?>"> Eliminar Amigo</button> </td>
         </tr>
 
 

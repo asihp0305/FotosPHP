@@ -1,5 +1,6 @@
 <?php
 include_once "../modelos/ClaseFotos.php";
+session_start();
 
 $fotos = new Fotos();
 $opt = filter_input(INPUT_POST, 'opt', FILTER_SANITIZE_NUMBER_INT);
@@ -59,9 +60,17 @@ switch($opt){
         break;
 
     case 8:
-        filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
+       $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_NUMBER_INT);
 
-        $fotos->eliminar($_POST["id"]);
+        $fotos->eliminar($id);
+        break;
+
+    case 9:
+        $Recibe = filter_input(INPUT_POST,'Recibe',FILTER_SANITIZE_NUMBER_INT);
+        $imagenes = filter_input(INPUT_POST,'fotosEnviadas',FILTER_SANITIZE_STRING,FILTER_REQUIRE_ARRAY);
+        foreach($imagenes as $imagen){
+            $fotos->compartir($Recibe,$imagen);
+        }
         break;
 
     default:

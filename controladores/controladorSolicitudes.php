@@ -35,16 +35,14 @@ switch($opt){
 
     case 5:
         $idElimAmigo = filter_input(INPUT_POST,"idElim",FILTER_SANITIZE_NUMBER_INT);
-        $sol->EliminarAmigo($idElimAmigo);
+        $idSesion = $_SESSION["id"];
+        $sol->EliminarAmigo($idSesion,$idElimAmigo);
+        $sol->EliminarAmigo($idElimAmigo,$idSesion);
         break;
 
     default:
         break;
 
-
 }
-
-
-
 
 ?>
